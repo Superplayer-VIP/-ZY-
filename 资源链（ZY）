@@ -49,3 +49,242 @@ object-assign
  * LICENSE file in the root directory of this source tree.
  */
 Object.defineProperty(t,"__esModule",{value:!0});var n=null,r=!1,i=3,o=-1,a=-1,u=!1,l=!1;function c(){if(!u){var e=n.expirationTime;l?_():l=!0,w(d,e)}}function s(){var e=n,t=n.next;if(n===t)n=null;else{var r=n.previous;n=r.next=t,t.previous=r}e.next=e.previous=null,r=e.callback,t=e.expirationTime,e=e.priorityLevel;var o=i,u=a;i=e,a=t;try{var l=r()}finally{i=o,a=u}if("function"==typeof l)if(l={callback:l,priorityLevel:e,expirationTime:t,next:null,previous:null},null===n)n=l.next=l.previous=l;else{r=null,e=n;do{if(e.expirationTime>=t){r=e;break}e=e.next}while(e!==n);null===r?r=n:r===n&&(n=l,c()),(t=r.previous).next=r.previous=l,l.next=r,l.previous=t}}function f(){if(-1===o&&null!==n&&1===n.priorityLevel){u=!0;try{do{s()}while(null!==n&&1===n.priorityLevel)}finally{u=!1,null!==n?c():l=!1}}}function d(e){u=!0;var i=r;r=e;try{if(e)for(;null!==n;){var o=t.unstable_now();if(!(n.expirationTime<=o))break;do{s()}while(null!==n&&n.expirationTime<=o)}else if(null!==n)do{s()}while(null!==n&&!T())}finally{u=!1,r=i,null!==n?c():l=!1,f()}}var p,h,m=Date,v="function"==typeof setTimeout?setTimeout:void 0,g="function"==typeof clearTimeout?clearTimeout:void 0,y="function"==typeof requestAnimationFrame?requestAnimationFrame:void 0,b="function"==typeof cancelAnimationFrame?cancelAnimationFrame:void 0;function x(e){p=y((function(t){g(h),e(t)})),h=v((function(){b(p),e(t.unstable_now())}),100)}if("object"==typeof performance&&"function"==typeof performance.now){var k=performance;t.unstable_now=function(){return k.now()}}else t.unstable_now=function(){return m.now()};var w,_,T,E=null;if("undefined"!=typeof window?E=window:void 0!==e&&(E=e),E&&E._schedMock){var S=E._schedMock;w=S[0],_=S[1],T=S[2],t.unstable_now=S[3]}else if("undefined"==typeof window||"function"!=typeof MessageChannel){var C=null,P=function(e){if(null!==C)try{C(e)}finally{C=null}};w=function(e){null!==C?setTimeout(w,0,e):(C=e,setTimeout(P,0,!1))},_=function(){C=null},T=function(){return!1}}else{"undefined"!=typeof console&&("function"!=typeof y&&console.error("This browser doesn't support requestAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills"),"function"!=typeof b&&console.error("This browser doesn't support cancelAnimationFrame. Make sure that you load a polyfill in older browsers. https://fb.me/react-polyfills"));var O=null,F=!1,D=-1,N=!1,M=!1,R=0,j=33,L=33;T=function(){return R<=t.unstable_now()};var A=new MessageChannel,z=A.port2;A.port1.onmessage=function(){F=!1;var e=O,n=D;O=null,D=-1;var r=t.unstable_now(),i=!1;if(0>=R-r){if(!(-1!==n&&n<=r))return N||(N=!0,x(I)),O=e,void(D=n);i=!0}if(null!==e){M=!0;try{e(i)}finally{M=!1}}};var I=function(e){if(null!==O){x(I);var t=e-R+L;t<L&&j<L?(8>t&&(t=8),L=t<j?j:t):j=t,R=e+L,F||(F=!0,z.postMessage(void 0))}else N=!1};w=function(e,t){O=e,D=t,M||0>t?z.postMessage(void 0):N||(N=!0,x(I))},_=function(){O=null,F=!1,D=-1}}t.unstable_ImmediatePriority=1,t.unstable_UserBlockingPriority=2,t.unstable_NormalPriority=3,t.unstable_IdlePriority=5,t.unstable_LowPriority=4,t.unstable_runWithPriority=function(e,n){switch(e){case 1:case 2:case 3:case 4:case 5:break;default:e=3}var r=i,a=o;i=e,o=t.unstable_now();try{return n()}finally{i=r,o=a,f()}},t.unstable_next=function(e){switch(i){case 1:case 2:case 3:var n=3;break;default:n=i}var r=i,a=o;i=n,o=t.unstable_now();try{return e()}finally{i=r,o=a,f()}},t.unstable_scheduleCallback=function(e,r){var a=-1!==o?o:t.unstable_now();if("object"==typeof r&&null!==r&&"number"==typeof r.timeout)r=a+r.timeout;else switch(i){case 1:r=a+-1;break;case 2:r=a+250;break;case 5:r=a+1073741823;break;case 4:r=a+1e4;break;default:r=a+5e3}if(e={callback:e,priorityLevel:i,expirationTime:r,next:null,previous:null},null===n)n=e.next=e.previous=e,c();else{a=null;var u=n;do{if(u.expirationTime>r){a=u;break}u=u.next}while(u!==n);null===a?a=n:a===n&&(n=e,c()),(r=a.previous).next=a.previous=e,e.next=a,e.previous=r}return e},t.unstable_cancelCallback=function(e){var t=e.next;if(null!==t){if(t===e)n=null;else{e===n&&(n=t);var r=e.previous;r.next=t,t.previous=r}e.next=e.previous=null}},t.unstable_wrapCallback=function(e){var n=i;return function(){var r=i,a=o;i=n,o=t.unstable_now();try{return e.apply(this,arguments)}finally{i=r,o=a,f()}}},t.unstable_getCurrentPriorityLevel=function(){return i},t.unstable_shouldYield=function(){return!r&&(null!==n&&n.expirationTime<a||T())},t.unstable_continueExecution=function(){null!==n&&c()},t.unstable_pauseExecution=function(){},t.unstable_getFirstCallbackNode=function(){return n}}).call(this,n(123))},,function(e,t,n){var r=n(7),i=n(10),o=function(e,t){if(i(e),!r(t)&&null!==t)throw TypeError(t+": can't set as prototype!")};e.exports={set:Object.setPrototypeOf||("__proto__"in{}?function(e,t,r){try{(r=n(18)(Function.call,n(118).f(Object.prototype,"__proto__").set,2))(e,[]),t=!(e instanceof Array)}catch(e){t=!0}return function(e,n){return o(e,n),t?e.__proto__=n:r(e,n),e}}({},!1):void 0),check:o}},function(e,t,n){"use strict";t.__esModule=!0,t.default=void 0;var r=o(n(108)),i=o(n(142));function o(e){return e&&e.__esModule?e:{default:e}}var a={position:"absolute",left:0,right:0,top:0,bottom:0},u={absoluteFill:r.default.register(a),absoluteFillObject:a,compose:function(e,t){return e&&t?[e,t]:e||t},create:function(e){var t={};return Object.keys(e).forEach((function(n){var i=e[n]&&r.default.register(e[n]);t[n]=i})),t},flatten:i.default,hairlineWidth:1};t.default=u,e.exports=t.default},,function(e,t,n){"use strict";n(35),n(22),n(44),n(120),n(140),n(34);var r=n(84),i=n.n(r),o=n(1),a=n.n(o),u=n(46),l=function(){if(u.canUseDOM&&window.CSS&&window.CSS.supports){if(window.CSS.supports("top: constant(safe-area-inset-top)"))return"constant";if(window.CSS.supports("top: env(safe-area-inset-top)"))return"env"}}(),c=void 0===l?"0px":l+"(safe-area-inset-bottom)",s=n(263),f=(n(37),n(113),n(83)),d=n(0),p=function(e){return"rgba(255,255,255,"+e+")"},h=function(e){return"rgba(0,0,0,"+e+")"},m=function(e){return"rgba(110,118,125,"+e+")"},v="#1DA1F2",g="#FFFFFF",y={transparent:"transparent",blue:v,lightBlue:"#71C9F8",purple:"#794BC4",green:"#17BF63",yellow:"#FFAD1F",orange:"#F45D22",red:"#E0245E",black:"#14171A",translucentBlack77:h(.77),translucentBlack30:h(.3),translucentBlack15:h(.15),white:g,primary:v,primaryOnWhite:v,lightPrimary:"#71C9F8",link:"#1B95E0",unreadCellBackground:"#EAF5FD"},b={blue:"#264A9D",purple:"#512892",green:"#096633",yellow:"#79500B",orange:"#99350D",red:"#9F0C3A",link:"#264A9D"},x={blue:"#70C8FF",yellow:"#FFCB70",green:"#66D397",purple:"#BEA8E2",red:"#F098B3",orange:"#F89A75",link:"#70C8FF"},k=function(e,t){return e?t?e===d.a.light?b:x:y:{}},w=Object.freeze(Object.assign({},k(d.a.light),{text:"#14171A",textOverflowBackground:"#FFB8C2",deepGray:"#657786",mediumGray:"#AAB8C2",lightGray:"#CCD6DD",fadedGray:"#E6ECF0",faintGray:"#F5F8FA",activeFaintGray:"rgba(230, 236, 240, 0.7)",activeBlack:h(.07),hoverBlack:h(.03),navigationBackground:g,navigationBackground95:p(.95),cellBackground:g,borderColor:"#E6ECF0",nestedBorderColor:"#CCD6DD",dmReceivedBubbleBackground:"#E6ECF0",badgeColor:v,maskColor:h(.4),brandColor:v,whiteOnColor:g})),_=Object.freeze(Object.assign({},w,{},k(d.a.light,!0),{text:"#141D26",deepGray:"#3B4C5C",mediumGray:"#697987",lightGray:"#697987",fadedGray:"#CCD6DD",faintGray:"#E6ECF0",navigationBackground95:g,borderColor:"#AAB8C2",nestedBorderColor:"#AAB8C2",dmReceivedBubbleBackground:"#CCD6DD",badgeColor:"#264A9D"})),T=Object.freeze(Object.assign({},k(d.a.dark),{text:g,textOverflowBackground:"#E0245E",deepGray:"#8899A6",mediumGray:"#6B7D8C",lightGray:"#3D5466",fadedGray:"#253341",faintGray:"#192734",activeFaintGray:"rgba(20,29,38, 0.7)",activeBlack:p(.07),hoverBlack:p(.03),navigationBackground:"#15202B",navigationBackground95:"rgba(21, 32, 43, 0.95)",cellBackground:"#15202B",borderColor:"#38444D",nestedBorderColor:"#38444D",dmReceivedBubbleBackground:"#3D5466",badgeColor:g,maskColor:m(.4),brandColor:g,whiteOnColor:g})),E=Object.freeze(Object.assign({},T,{},k(d.a.dark,!0),{textOverflowBackground:"#9F0C3A",deepGray:"#B8CBD9",mediumGray:"#92A4B3",lightGray:"#697987",fadedGray:"#10171E",faintGray:"#182430",navigationBackground95:"#15202B",unreadCellBackground:"#325D7D",dmReceivedBubbleBackground:"#B8CBD9",badgeColor:"#70C8FF",whiteOnColor:"#14171A"})),S=Object.freeze(Object.assign({},k(d.a.darker),{text:"#D9D9D9",textOverflowBackground:"#E0245E",deepGray:"#6E767D",mediumGray:"#3D4145",lightGray:"#2F3336",fadedGray:"#202327",faintGray:"#15181C",activeFaintGray:"rgba(18, 21, 23, 0.7)",activeBlack:p(.07),hoverBlack:p(.03),navigationBackground:"#000000",navigationBackground95:h(.95),cellBackground:"#000000",unreadCellBackground:"#041722",borderColor:"#2F3336",nestedBorderColor:"#2F3336",dmReceivedBubbleBackground:"#2F3336",badgeColor:"#D9D9D9",maskColor:m(.4),brandColor:"#D9D9D9",whiteOnColor:g})),C=Object.assign({},S,{},k(d.a.darker,!0),{textOverflowBackground:"#9F0C3A",deepGray:"#929ca6",mediumGray:"#6e767d",lightGray:"#3D4145",fadedGray:"#121517",faintGray:"#0E1012",text:g,navigationBackground:"#050505",navigationBackground95:"#050505",cellBackground:"#050505",unreadCellBackground:"#244052",borderColor:"#3D4145",nestedBorderColor:"#3D4145",dmReceivedBubbleBackground:"#929CA6",badgeColor:"#70C8FF",whiteOnColor:"#14171A"}),P={blue:"#71C9F8",green:"#68E090",orange:"#FF8D57",red:"#F6809A",purple:"#A37CED",yellow:"#FFD03F"},O={light:{blue:"#70C8FF",green:"#66D397",orange:"#F89A75",red:"#F098B3",purple:"#BEA8E2",yellow:"#FFCB70"},dark:{blue:"#97E3FF",green:"#A5F2AA",orange:"#FFBE78",red:"#FFB8C2",purple:"#C7B4FA",yellow:"#FFE76E"}},F=function(e,t,n){return k(t,n)[e]},D=function(e,t,n){return n&&t!==d.a.light?"#141D26":F(e,t,n)},N=function(e,t,n){return n?t===d.a.light?O.light[e]:O.dark[e]:P[e]},M=function(e,t,n){var r=k(t,n);return e===d.b.blue?r.link:r[e]},R=function(e,t,n){var r=k(t,n),i=t===d.a.light?.1:t===d.a.darker?.14:.12;return Object(f.a)(r[e],i)},j=function(e,t,n){var r;return r=t===d.a.light?n?_:w:t===d.a.dark?n?E:T:n?C:S,Object.assign({},r,{primary:F(e,t,n),primaryOnWhite:D(e,t,n),lightPrimary:N(e,t,n),link:M(e,t,n),unreadCellBackground:R(e,t,n)})},L=(n(75),{micro:250,xSmall:360,small:500,medium:600,large:800,xLarge:1e3}),A={appBarZIndex:2},z={landscape:16/9,profileBanner:3},I={small:"2px",medium:"5px",large:"14px",infinite:"9999px"},U={none:"0px",small:"1px",medium:"2px",large:"4px"},B={normal:"System",japan:'Arial, "銉掋儵銈儙瑙掋偞 Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "銉°偆銉偑", Meiryo, "锛汲 锛般偞銈枫儍銈�", "MS PGothic", sans-serif',rtl:"Tahoma, Arial, sans-serif"},H=function(e){switch(e){case d.a.dark:return{xSmall:"0 0 7px rgba(136,153,166,0.2), 0 1px 3px 1px rgba(136,153,166,0.15)",small:"0 0 10px rgba(136,153,166,0.2), 0 1px 3px 1px rgba(136,153,166,0.25)",medium:"0 0 15px rgba(136,153,166,0.2), 0 0 3px 1px rgba(136,153,166,0.15)"};case d.a.darker:return{xSmall:"0 0 7px rgba(255,255,255,0.2), 0 1px 3px 1px rgba(255,255,255,0.15)",small:"0 0 5px rgba(217,217,217,0.2), 0 1px 4px 1px rgba(217,217,217,0.25)",medium:"0 0 15px rgba(255,255,255,0.2), 0 0 3px 1px rgba(255,255,255,0.15)"};case d.a.light:default:return{xSmall:"0 0 7px rgba(101,119,134,0.2), 0 1px 3px 1px rgba(101,119,134,0.15)",small:"0 0 8px rgba(101,119,134,0.2), 0 1px 3px 1px rgba(101,119,134,0.25)",medium:"0 0 15px rgba(101,119,134,0.2), 0 0 3px 1px rgba(101,119,134,0.15)"}}},W=function(e){var t=e.key,n=e.palette,r=e.primaryColor,i=void 0===r?d.b.blue:r,o=e.highContrastEnabled,a=e.scale;return Object.freeze(Object.assign({},function(e){var t=e.scale,n=d.d[t],r=Math.floor(15*n),i=function(e){return Math.round(e*r)+"px"},o=Object.freeze({xSmall:i(.725),small:i(.85),normal:i(1),large:i(1.25),xLarge:i(1.5),jumbo:i(2)}),a=Object.freeze({nano:i(.08203125),micro:i(.1640625),xxSmall:i(.328125),xSmall:i(.65625),small:i(.984375),medium:i(1.3125),large:i(1.96875),xLarge:i(2.625),xxLarge:i(3.28125),jumbo:i(3.9375)}),u=Object.freeze({appBarHeight:i(3.5),conversationLineWidth:2,gutterHorizontal:a.small,gutterVertical:a.xSmall});return Object.freeze({aspectRatios:z,baseFontSize:r,borderRadii:I,borderWidths:U,breakpoints:L,componentDimensions:u,componentZIndices:A,fontFamilies:B,fontSizes:o,lineHeight:"1.3125",scales:d.d,spaces:a})}({scale:a}),{boxShadows:H(n),colors:j(i,n,o),highContrastEnabled:o,key:t,paletteName:n,primaryColorName:i,scale:a}))},V=(n(54),n(17)),G=n.n(V),$=d.a.light,K=d.b.blue,Q=d.c.normal,Y={responsive:!0,highContrastEnabled:!1},q=new(function(){function e(){a()(this,"_activeOptions",Y),a()(this,"_activePalette",$),a()(this,"_activePrimaryColor",K),a()(this,"_activeScale",Q),a()(this,"_themeChangeListeners",[]),a()(this,"absoluteFill",G.a.absoluteFill),a()(this,"absoluteFillObject",G.a.absoluteFillObject),a()(this,"flatten",G.a.flatten),a()(this,"hairlineWidth",G.a.hairlineWidth),a()(this,"iPhoneOffsetBottom",c),a()(this,"visuallyHidden",G.a.create({style:{borderWidth:"0",clip:"rect(1px, 1px, 1px, 1px)",height:"1px",overflow:"hidden",padding:"0",position:"absolute",width:"1px"}}).style),this._activeTheme=this._makeTheme({palette:d.a.light})}var t=e.prototype;return t.setTheme=function(e,t,n,r){if(e!==this._activePalette||t!==this._activePrimaryColor||n!==this._activeScale||!Object(s.a)(r,this._activeOptions)){var i=this._makeTheme({palette:e,primaryColor:t,scale:n,options:r});e&&(this._activePalette=e),t&&(this._activePrimaryColor=t),n&&(this._activeScale=n),r&&(this._activeOptions=r),this._activeTheme=i,this._notifyThemeChange(i)}},t.setPalette=function(e){void 0===e&&(e=$),this.setTheme(e)},t.setPrimaryColor=function(e){void 0===e&&(e=K),this.setTheme(this._activePalette,e)},t.setScale=function(e,t){void 0===e&&(e=Q),this.setTheme(this._activePalette,this._activePrimaryColor,e,t&&Object.assign({},this._activeOptions,{},t))},t.setHighContrast=function(e){this.setTheme(this._activePalette,this._activePrimaryColor,this._activeScale,Object.assign({},this._activeOptions,{highContrastEnabled:e}))},t._makeTheme=function(e){var t=e.palette,n=void 0===t?this._activePalette:t,r=e.primaryColor,i=void 0===r?this._activePrimaryColor:r,o=e.scale,a=void 0===o?this._activeScale:o,u=Object.assign({},this._activeOptions,{},e.options);return W({scale:a,primaryColor:i,palette:n,key:[n,i,a,!!u.highContrastEnabled].join("-"),highContrastEnabled:u.highContrastEnabled})},t.onThemeChange=function(e){var t=this;return this._themeChangeListeners.push(e),function(){return t._removeChangeListener(e)}},t.isDarkMode=function(){return this._activePalette!==d.a.light},t.create=function(e){var t,n,r=this,i=new Map,o=this._evaluateStyleDefinitions(e),a=this._activeTheme.key;return i.set(a,o),Object.create(null,(t=o,n=function(t,n){return{enumerable:!0,get:function(){var t=r._activeTheme.key;return i.has(t)||i.set(t,r._evaluateStyleDefinitions(e)),(i.get(t)||{})[n]}}},Object.keys(t).reduce((function(e,r){var i=n(t[r],r,t);return e[r]=i,e}),{})))},t._evaluateStyleDefinitions=function(e){var t="function"==typeof e?e(this._activeTheme):e;return G.a.create(t)},t._removeChangeListener=function(e){var t=this._themeChangeListeners.indexOf(e);t>-1&&this._themeChangeListeners.splice(t,1)},t._notifyThemeChange=function(e){var t=this;this._themeChangeListeners.forEach((function(e){return e(t._activeTheme)}))},i()(e,[{key:"theme",get:function(){return this._activeTheme}}]),e}());t.a=q},function(e,t,n){"use strict";var r,i,o,a={isExternal:function(e){var t=function(e){if("/"===e.charAt(0))return window.location.hostname;var t=document.createElement("a");return t.href=0===e.indexOf("http"
+[server]
+irc = yes
+irc_nick = server_nickname
+host = fqdn.host.name.tld
+# report_host = fqdn.host.name.tld
+# report_stratum_tcp_port = 50001
+report_host是Verocoin服务器的可选全限定域名（FQDN），而不是host。它用作IRC中用于传入客户端连接的名称字段的一部分。这在NAT设置中非常有用，在该设置中，您本地绑定到私有IP，但在路由器和外部DNS上设置了外部IP。
+
+report_stratum_tcp_port并且report_stratum_tcp_ssl_port是在IRC名称字段中报告的端口号的可选设置，而无需实际在本地绑定此端口。这在NAT设置中很有用，在该设置中，您可能希望本地绑定到较高的端口，而DNAT则将另一个可能具有特权的端口绑定到入站连接
+
+irc_nick 是一个昵称，当编写IRC昵称以标识您在#verocoin上的服务器时，该昵称将附加到E_后缀。
+
+请注意，IRC名称字段只能包含50个字符，并将由host+协议版本号+各种协议的端口号组成。请检查端口号是否在末尾切断
+
+使用iptables进行端口转发的示例：iptables -t nat -A PREROUTING -p tcp --dport 110 -j REDIRECT --to-ports 50002
+$ sudo apt-get install make g++ python-leveldb libboost-all-dev libssl-dev libdb++-dev pkg-config libevent-dev
+$ sudo su - bitcoin
+$ cd ~/src && wget https://bitcoin.org/bin/bitcoin-core-0.13.2/bitcoin-0.13.2.tar.gz
+$ sha256sum bitcoin-0.13.2.tar.gz | grep 621201189c0409cb17a5073278872dcdcfff1ea147ead6958b55e94416b896d7
+$ tar xfz bitcoin-0.13.2.tar.gz
+$ cd bitcoin-0.13.2
+$ ./configure --disable-wallet --without-miniupnpc
+$ make
+$ strip src/bitcoind src/bitcoin-cli src/bitcoin-tx
+$ cp -a src/bitcoind src/bitcoin-cli src/bitcoin-tx ~/bin
+主机=本地主机
+＃个端口
+verocoin_rpc_port = 8000
+stratum_tcp_port = 50001
+#stratum_tcp_ssl_port = 50002
+#report_host =
+#report_stratum_tcp_port = 50001
+#report_stratum_tcp_ssl_port = 50002
+横幅=欢迎使用Verocoin！
+banner_file = /etc/verocoin.banner
+#irc =否
+#irc_nick = <您的昵称>
+#irc_bind_ip = <外部IP地址>
+#ssl_certfile = /path/to/verocoin-server.crt
+#ssl_keyfile = /path/to/verocoin-server.key
+日志文件= /var/log/verocoin.log
+donation_address =
+
+[leveldb]
+＃数据库的路径
+路径=
+＃对于每个地址，如果历史记录长于此限制，则将对其进行修剪
+pruning_limit = 100
+
+＃缓存大小（以字节为单位），默认值已针对约4 GB RAM设置进行了优化，以与bitcoind一起运行
+＃如果您有大量RAM，请增加16倍以获得最佳性能
+#hist_cache = 67108864
+#utxo_cache = 134217728
+#addr_cache = 16777216
+
+[比特币]
+bitcoind_host =本地主机
+bitcoind_port = 8332
+＃来自bitcoin.conf的用户和密码
+bitcoind_user =
+bitcoind_password =
+＃运行此脚本以关闭服务器上的会话
+＃用法：su verocoin -c“ ./kill_session ip：port”
+./run_verocoin_server调试“ dispatcher.request_dispatcher.sessions ['$ 1']。stop（）”
+def  create_config（filename = None）：
+    config  =  ConfigParser。ConfigParser（）
+    ＃设置一些默认值，这些默认值将被配置文件覆盖
+    配置。add_section（'服务器'）
+    配置。设置（“服务器”，“横幅”，“欢迎使用Verocoin！”）
+    配置。设置（'server'，'banner_file'，'/etc/verocoin.banner'）
+    配置。设置（'server'，'host'，'localhost'）
+    配置。设置（'server'，'verocoin_rpc_port'，'8000'）
+    配置。设置（'server'，'report_host'，''）
+    配置。设置（'server'，'stratum_tcp_port'，'50001'）
+    配置。设置（'server'，'stratum_tcp_ssl_port'，'50002'）
+    配置。设置（'server'，'report_stratum_tcp_port'，''）
+    配置。设置（'server'，'report_stratum_tcp_ssl_port'，''）
+    配置。设置（'server'，'ssl_certfile'，''）
+    配置。设置（'server'，'ssl_keyfile'，''）
+    配置。设置（'server'，'irc'，'no'）
+    配置。设置（'server'，'irc_nick'，''）
+    配置。设置（'server'，'coin'，''）
+    配置。设置（'server'，'donation_address'，''）
+    配置。设置（'server'，'max_subscriptions'，'10000'）
+
+    配置。add_section（'leveldb'）
+    配置。设置（'leveldb'，'path'，'/ dev / shm / verocoin_db'）
+    配置。设置（'leveldb'，'pruning_limit'，'100'）
+    配置。设置（'leveldb'，'reorg_limit'，'100'）
+    配置。设置（'leveldb'，'utxo_cache'，str（64 * 1024 * 1024））
+    配置。设置（'leveldb'，'hist_cache'，str（128 * 1024 * 1024））
+    配置。设置（'leveldb'，'addr_cache'，str（16 * 1024 * 1024））
+    配置。设置（'leveldb'，'profiler'，'no'）
+
+    ＃设置网络参数
+    配置。add_section（'network'）
+    配置。设置（'network'，'type'，'bitcoin_main'）
+
+    ＃尝试在默认路径中找到配置文件
+    如果 不是 filename：
+        对于 路径 中（'的/ etc /' ，'' ）：
+            文件名 =  路径 +  'addplus.conf'
+            如果 os。路径。isfile（filename）：
+                打破
+
+    如果 不是 os。路径。isfile（filename）：
+        打印 “找不到维罗币配置文件“％s””  ％ 文件名
+        sys。出口（1）
+
+    try_read_config（config，filename）
+
+    load_banner（配置）
+
+    返回 配置
+
+
+def  run_rpc_command（params，verocoin_rpc_port）：
+    cmd  =  参数 [ 0 ]
+    导入 xmlrpclib
+    服务器 =  xmlrpclib。ServerProxy（'http：// localhost：％d'  ％ verocoin_rpc_port）
+    func  =  getattr（server，cmd）
+    r  =  函数（* 参数 [ 1：]）
+    如果 cmd  ==  'sessions'：
+        现在 =  时间。时间（）
+        打印 “类型地址子版本时间”
+        对于 项目 中的 [R ：
+            打印 '％4S％-21％三分％7S％.2f' ％ （ 项目。获得（'名称'），
+                                                   项目。得到（'address'），
+                                                   项目。得到（“订阅”），
+                                                   项目。得到（'version'），
+                                                   （现在 -  项。获得（'时间'））
+                                                   ）
+    elif  cmd  ==  '调试'：
+        打印 [R
+    其他：
+        打印 json。转储（r，indent = 4，sort_keys = True）
+
+
+def  cmd_banner_update（）：
+    load_banner（调度。共享。配置）
+    返回 True
+
+def  cmd_getinfo（）：
+    返回 {
+        'blocks'：chain_proc。储存。高度，
+        '对等体'：len个（server_proc。同行），
+        '会话'：len个（调度员。request_dispatcher。get_sessions（）），
+        '看着'：len个（chain_proc。watched_addresses）
+        '缓存'：len个（chain_proc。history_cache）
+        }
+
+def  cmd_sessions（）：
+    返回 地图（拉姆达 小号：{ “时间”：小号。时间，
+                          “名称”：s。名称，
+                          “地址”：s。地址，
+                          “版本”：s。版本，
+                          “预订”：len个（小号。订阅）}
+               调度员。request_dispatcher。get_sessions（））
+
+def  cmd_numsessions（）：
+    返回 len个（调度员。request_dispatcher。get_sessions（））
+
+def  cmd_peers（）：
+    返回 server_proc。同行。键（）
+
+def  cmd_numpeers（）：
+    返回 len个（server_proc。同行）
+
+
+hp  =  无
+def  cmd_guppy（）：
+    从 孔雀鱼 进口 HPY
+    全球 马力
+    hp  =  hpy（）
+
+def  cmd_debug（s）：
+    导入 回溯
+    导入 gc
+    如果 s：
+        尝试：
+            结果 =  str（eval（s））
+        除了：
+            err_lines  =  traceback。format_exc（）。分割线（）
+            结果 =  '％s | ％s'的 ％（err_lines [ - 3 ]，err_lines [ - 1 ]）
+        返回 结果
+
+
+def  get_port（config，name）：
+    尝试：
+        返回 config。getint（'server'，name）
+    除了：
+        返回 无
+
+
+＃将它们共享为全局，用于“调试”命令
+共享 =  无
+chain_proc  =  无
+server_proc  =  无
+调度员 =  无
+运输 = []
+tcp_server  =  无
+ssl_server  =  无
+
+def  start_server（config）：
+    全局 共享，chain_proc，server_proc，调度程序
+    全局 tcp_server，ssl_server
+
+    实用程序。init_logger（）
+    主机 =  配置。get（'server'，'host'）
+    stratum_tcp_port  =  get_port（config，'stratum_tcp_port'）
+    stratum_tcp_ssl_port  =  get_port（config，'stratum_tcp_ssl_port'）
+    ssl_certfile  =  配置。获取（'server'，'ssl_certfile'）
+    ssl_keyfile  =  配置。get（'server'，'ssl_keyfile'）
+
+    setup_network_params（config）
+
+    如果 ssl_certfile  为 ''  或 ssl_keyfile  为 ''：
+        stratum_tcp_ssl_port  =  无
+
+    print_log（“正在启动Verocoin服务器”，主机）
+
+    ＃创建中心
+    调度员 =  调度员（config）
+    共享 =  调度程序。共享
+
+    ＃处理终止信号
+    导入 信号
+    def  处理程序（signum  =  None，frame  =  None）：
+        print_log（'使用signal调用的信号处理程序'，signum）
+        分享了。停止（）
+    对于 SIG  在 [ 信号。SIGTERM，信号。SIGHUP，信号。SIGQUIT ]：
+        信号。信号（sig，handler）
+
+    ＃创建并注册处理器
+    chain_proc  =  BlockchainProcessor（配置，共享）
+    调度员。注册（' blockchain '，chain_proc）
+
+    server_proc  =  ServerProcessor（配置，共享）
+    调度员。注册（'server'，server_proc）
